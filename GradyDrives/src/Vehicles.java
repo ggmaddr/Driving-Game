@@ -1,9 +1,29 @@
 abstract public class Vehicles {
     private int speed;
-    private int[] position = new int[2];
-    private String type;
-    abstract void move();
 
+    public int getxPos() {
+        return xPos;
+    }
+
+    public void setxPos(int xPos) {
+        this.xPos = xPos;
+    }
+
+    public int getyPos() {
+        return yPos;
+    }
+
+    public void setyPos(int yPos) {
+        this.yPos = yPos;
+    }
+
+    private int xPos;
+    private int yPos;
+
+    private String type;
+    abstract void move(char command);
+
+    //Setters and getters
     public int getSpeed() {
         return speed;
     }
@@ -11,15 +31,6 @@ abstract public class Vehicles {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-
-    public int[] getPosition() {
-        return position;
-    }
-
-    public void setPosition(int[] position) {
-        this.position = position;
-    }
-
     public String getType() {
         return type;
     }
@@ -28,11 +39,8 @@ abstract public class Vehicles {
         this.type = type;
     }
 
-    Vehicles (int positionX, int positionY, int speed, String type)
+    Vehicles (String type)
     {
-        position[0] = positionX;
-        position[1] = positionY;
-        this.speed = speed;
         this.type = type;
     }
 }
