@@ -1,11 +1,12 @@
 import javax.swing.*;
 public class Car extends Vehicles{
     private ImageIcon carIcon;
-    Car(String type) {
+    Car(int xPos, int yPos, int speedlimit, String type, ImageIcon carIcon) {
         super(type);
-    }
-    public void setCarIcon(ImageIcon carIcon) {
-        this.carIcon = carIcon;
+        this.carIcon=carIcon;
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.speedlimit = speedlimit;
     }
     public ImageIcon getCarIcon() {
         return carIcon;
@@ -23,6 +24,7 @@ public class Car extends Vehicles{
                     setxPos(100);
                 }
             }
+            break;
             case 'r':
             {
                 setxPos(getxPos() + 100);
@@ -32,6 +34,7 @@ public class Car extends Vehicles{
                     setxPos(500);
                 }
             }
+            break;
 
         }
     }
