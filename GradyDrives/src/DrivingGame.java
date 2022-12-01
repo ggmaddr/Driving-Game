@@ -33,15 +33,10 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
         return obPosYArray;
     }
 
-    private int obPosXArray[]={100,200,300,400,500};
-    private int obPosYArray[]= {-240,-480,-720,-960,-1200};
+    private final int[] obPosXArray ={100,200,300,400,500};
+    private final int[] obPosYArray = {-240,-480,-720,-960,-1200};
 
-
-    private Obstacles ob1 = new Obstacles(car, this, 3, new ImageIcon("motorbike.png"));
-    private Obstacles ob2 = new Obstacles(car, this,2, new ImageIcon("rock.png"));
-    private Obstacles ob3 = new Obstacles(car, this,1, new ImageIcon("roadwork.png"));
-
-    private LinkedList<Obstacles> obList = new LinkedList<Obstacles>();
+    private final LinkedList<Obstacles> obList = new LinkedList<Obstacles>();
     private ListIterator<Obstacles> list_Iter;
 
     public void fileReader(FileReader file) throws IOException {
@@ -74,8 +69,11 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
         score = 0;
         delay = 100;
         car.setSpeed(90);
+        Obstacles ob1 = new Obstacles(car, this, 3, new ImageIcon("motorbike.png"));
         ob1.randomPositionGenerator();
+        Obstacles ob2 = new Obstacles(car, this, 2, new ImageIcon("rock.png"));
         ob2.randomPositionGenerator();
+        Obstacles ob3 = new Obstacles(car, this, 1, new ImageIcon("roadwork.png"));
         ob3.randomPositionGenerator();
         gameOver =false;
         obList.add(ob1);
@@ -156,6 +154,14 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
         }
     }
     public void drawComparison(Graphics g) {
+
+
+        int iconY = -90;
+        list_Iter = obList.listIterator();
+        while (list_Iter.hasNext()) {
+            Obstacles currentOb = list_Iter.next();
+            currentOb.getObsIcon().paintIcon(this, g, 730, iconY += 200);
+        }
         //BEAUTIFUL title!
         g.setColor(new Color(24, 78, 119));
         g.fillRect(650, 60, 230, 40);
@@ -176,13 +182,6 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
         g.drawString("1", 650, 200);
         g.drawString("2", 650, 400);
         g.drawString("3", 650, 600);
-
-        int iconY = -90;
-        list_Iter = obList.listIterator();
-        while (list_Iter.hasNext()) {
-            Obstacles currentOb = list_Iter.next();
-            currentOb.getObsIcon().paintIcon(this, g, 730, iconY += 200);
-        }
     }
 
     public void drawScore(Graphics g)
@@ -294,3 +293,4 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
     public void actionPerformed(ActionEvent e) {
     }
 }
+
