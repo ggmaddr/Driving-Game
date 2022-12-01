@@ -1,0 +1,13 @@
+@instruction: if you want to hide line from reader --> use @,
+@if you want to stop reading --> ".stop"
+@if you want to split line --> "\n"
+@example below:
+You hit
+the obstacles.
+\n
+Please
+drive
+@this line should not be print
+responsively.
+.stop
+You should not have this line. Test ".stop"
