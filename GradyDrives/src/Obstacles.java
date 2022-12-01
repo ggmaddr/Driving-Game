@@ -1,17 +1,22 @@
 import javax.swing.*;
+import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Random;
 
-public class Obstacles implements ThingsOnRoad{
+public class Obstacles implements ThingsOnRoad, Comparable<Obstacles>{
     private int obsX;
     private int obsY;
-    private Car interactCar;
-    private DrivingGame interactGame;
+    private final Car interactCar;
+    private final DrivingGame interactGame;
 
     private ImageIcon obsIcon;
+    private int coolness;
 
-    Obstacles(Car interactCar, DrivingGame interactGame) {
+    Obstacles(Car interactCar, DrivingGame interactGame, int coolness, ImageIcon icon) {
         this.interactCar = interactCar;
         this.interactGame = interactGame;
+        this.coolness = coolness;
+        obsIcon = icon;
     }
 
     public int getObsX() {
@@ -35,33 +40,51 @@ public class Obstacles implements ThingsOnRoad{
     public void setObsIcon(ImageIcon obsIcon) {
         this.obsIcon = obsIcon;
     }
-    int getVerticleDistance()
+    @Override
+    public int getVerticleDistance()
     {
         return Math.abs(interactCar.getyPos() - obsY);
     }
 
-    void randomPositionGenerator()
+    int indexInPosArray(int[] posArray, int value)
     {
-        if(obsY > interactGame.getScreenSize())
+        int index = -1;
+        for (int i = 0; i< posArray.length;i++)
         {
+            if (posArray[i] == value)
+            {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    @Override
+    public void randomPositionGenerator()
+    {
             int[] posX = interactGame.getObPosXArray();
             int[] posY = interactGame.getObPosYArray();
 
             Random random = new Random();
             int randomIndexX, randomIndexY;
-            randomIndexX = random.nextInt(posX.length);
-            obsX = (posX[randomIndexX]);
-            randomIndexY = random.nextInt(posY.length);
-            obsX = (posX[randomIndexX]);
-        }
 
+            randomIndexX = random.nextInt(posX.length);
+            randomIndexY = random.nextInt(posY.length);
+
+            obsX = (posX[randomIndexX]);
+            obsY = (posY[randomIndexY]);
     }
     //function is the challenge of the game
     @Override
     public void function() {
         //if car touch obstacles --> lose game;
-        if (obsX == interactCar.getxPos()
-                && obsY == interactCar.getyPos())
-            interactGame.setGameOver(false);
+        if (obsX == interactCar.getxPos() && getVerticleDistance() < interactCar.getCarIcon().getIconHeight())
+            interactGame.setGameOver(true);
+    }
+
+    @Override
+    public int compareTo(Obstacles o) {
+        return this.coolness - o.coolness;
     }
 }
