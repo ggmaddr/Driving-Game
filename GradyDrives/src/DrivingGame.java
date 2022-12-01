@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.*;
-import java.sql.Array;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -16,11 +15,10 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
     final private int screenSize = 700;
     String gameOvertext = "";
 
-
     private Car car = new Car(300, 500,200,"Ferrari", new ImageIcon("ferrari.png"));
     private boolean gameOver;
     private int score;
-    int roadmove;
+    int markings;
 
     int delay;
     public void setGameOver(boolean gameOver) {
@@ -72,7 +70,7 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
         printer.close();
     }
     public DrivingGame() throws HeadlessException, IOException {
-        roadmove = 0;
+        markings = 0;
         score = 0;
         delay = 100;
         car.setSpeed(90);
@@ -107,7 +105,7 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
         g.fillRect(100, 0, 500, screenSize);
         drawComparison(g);
 
-        if(roadmove==0)
+        if(markings==0)
         {
             for(int i=0; i<=screenSize; i+=100)
             {
@@ -115,7 +113,7 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
                 g.fillRect(350, i,20, 70);
 
             }
-            roadmove=1;
+            markings=1;
         }
         else
         {
@@ -124,7 +122,7 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
                 g.setColor(Color.white);
                 g.fillRect(350, i,20, 70);
             }
-            roadmove=0;
+            markings=0;
         }
         car.getCarIcon().paintIcon(this, g, car.getxPos(), car.getyPos());
 
@@ -249,7 +247,7 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
         }
     }
     public static void main(String[] args) throws IOException {
-        DrivingGame newGame = new DrivingGame();
+        new DrivingGame();
     }
 
     public void drawMultipleLineString(Graphics g, String string)
@@ -296,4 +294,3 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
     public void actionPerformed(ActionEvent e) {
     }
 }
-
