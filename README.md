@@ -5,6 +5,8 @@ Download the whole GradyDrives folder and run the DrivingGame.java file.
 
 You will start play the game after running the file.
 
+gameover.txt is the source strings for game over announcement
+
 The score.txt scores the most recent result.
 
 This is the document link explains all CS applications of the project.
