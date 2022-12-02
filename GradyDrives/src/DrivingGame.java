@@ -153,9 +153,8 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
             throw new RuntimeException(e);
         }
     }
-    public void drawComparison(Graphics g) {
-
-
+    public void drawComparison(Graphics g) 
+    {
         int iconY = -90;
         list_Iter = obList.listIterator();
         while (list_Iter.hasNext()) {
