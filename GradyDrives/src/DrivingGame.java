@@ -6,13 +6,13 @@ import java.awt.event.KeyListener;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class DrivingGame extends JFrame implements KeyListener, ActionListener
 {
-    final private int screenSize = 700;
+    public int getScreenSize() {return screenSize;}
+    final private int screenSize = 800;
     String gameOvertext = "";
 
     private Car car = new Car(300, 500,200,"Ferrari", new ImageIcon("ferrari.png"));
@@ -32,6 +32,9 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
     public int[] getObPosYArray() {
         return obPosYArray;
     }
+
+    public void setScore(int score) {this.score = score;}
+    public int getScore() {return score;}
 
     private final int[] obPosXArray ={100,200,300,400,500};
     private final int[] obPosYArray = {-240,-480,-720,-960,-1200};
@@ -69,19 +72,22 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
         score = 0;
         delay = 100;
         car.setSpeed(90);
-        Obstacles ob1 = new Obstacles(car, this, 3, new ImageIcon("motorbike.png"));
+        Obstacles ob1 = new Obstacles(car, this, 130, new ImageIcon("motorbike.png"));
         ob1.randomPositionGenerator();
-        Obstacles ob2 = new Obstacles(car, this, 2, new ImageIcon("rock.png"));
+        Obstacles ob2 = new Obstacles(car, this, 120, new ImageIcon("rock.png"));
         ob2.randomPositionGenerator();
-        Obstacles ob3 = new Obstacles(car, this, 1, new ImageIcon("roadwork.png"));
+        Obstacles ob3 = new Obstacles(car, this, 10, new ImageIcon("roadwork.png"));
         ob3.randomPositionGenerator();
+        Obstacles gift1 = new Gift(car, this,100,new ImageIcon("gift1.png"));
+        gift1.randomPositionGenerator();
         gameOver =false;
+        obList.add(gift1);
         obList.add(ob1);
         obList.add(ob2);
         obList.add(ob3);
         Collections.sort(obList);
 
-        setBounds(300,10,screenSize+200,screenSize);
+        setBounds(300,10,screenSize+140,screenSize);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
@@ -89,17 +95,20 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
         setFocusable(true);
         setResizable(false);
 
+
         //file IO
         fileReader(new FileReader("gameover.txt"));
     }
     @Override
     public void paint(Graphics g) {
-        Image bground = new ImageIcon("backgroundimg.jpeg").getImage();
-        g.drawImage(bground, 0, 0, null);
-        g.setColor(new Color(204, 213, 174));
+//        Image bground = new ImageIcon("backgroundimg.jpeg").getImage();
+//        g.drawImage(bground, 0, 0, null);
+        g.setColor(new Color(128, 185, 24));
+        g.fillRect(0,0,screenSize+140,screenSize);
+        g.setColor(new Color(0, 0, 0));
         g.fillRect(90,0,10,screenSize);
         g.fillRect(600, 0, 10, screenSize);
-        g.setColor(new Color(80, 51, 34));
+        g.setColor(new Color(0, 77, 115));
         g.fillRect(100, 0, 500, screenSize);
         drawComparison(g);
 
@@ -153,34 +162,36 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
             throw new RuntimeException(e);
         }
     }
-    public void drawComparison(Graphics g) 
-    {
-        int iconY = -90;
+    public void drawComparison(Graphics g) {
+        int iconY = -110;
+        int iconYincrement = 190;
         list_Iter = obList.listIterator();
         while (list_Iter.hasNext()) {
             Obstacles currentOb = list_Iter.next();
-            currentOb.getObsIcon().paintIcon(this, g, 730, iconY += 200);
+            currentOb.getObsIcon().paintIcon(this, g, 730, iconY += iconYincrement);
         }
         //BEAUTIFUL title!
         g.setColor(new Color(24, 78, 119));
-        g.fillRect(650, 60, 230, 40);
-        g.setColor(new Color(197, 255, 9));
-        g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString("Obstacles Coolness", 660, 87);
+        g.fillRect(650, 30, 240, 40);
+        g.setColor(new Color(255, 217, 82));
+        g.setFont(new Font("Arial", Font.BOLD, 22));
+        g.drawString("Obstacles Coolness", 660, 55);
 
-        //number
-        g.setColor(new Color(255, 241, 203));
-        g.setFont(new Font("Arial", Font.BOLD, 60));
+        //ranking
+        for (int i = 0; i<obList.size(); i++)
+        {
+            int Yincrement = iconYincrement*i;
 
-        g.fillOval(630, 140,70,80);
-        g.fillOval(630, 340,70,80);
-        g.fillOval(630, 540,70,80);
+            //draw ovals
+            g.setColor(new Color(255, 241, 203));
+            g.fillOval(630, 140+Yincrement,50,60);
 
-        g.setColor(new Color(188, 71, 73));
+            //draw number
+            g.setColor(new Color(188, 71, 73));
+            g.setFont(new Font("Arial", Font.BOLD, 50));
+            g.drawString(String.valueOf(i+1), 640, 190 + Yincrement);
+        }
 
-        g.drawString("1", 650, 200);
-        g.drawString("2", 650, 400);
-        g.drawString("3", 650, 600);
     }
 
     public void drawScore(Graphics g)
@@ -279,17 +290,13 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
             }
         }
     }
-
     @Override
     public void keyTyped(KeyEvent e) {
     }
-
     @Override
     public void keyReleased(KeyEvent e) {
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
     }
 }
-
