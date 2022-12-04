@@ -1,42 +1,42 @@
 import javax.swing.*;
-import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.Random;
-
 public class Obstacles implements ThingsOnRoad, Comparable<Obstacles>{
-    private int obsX;
-    private int obsY;
-    private final Car interactCar;
-    private final DrivingGame interactGame;
-
-    private ImageIcon obsIcon;
-    private int coolness;
-
-    Obstacles(Car interactCar, DrivingGame interactGame, int coolness, ImageIcon icon) {
+    protected int obsX;
+    protected int obsY;
+    protected final Car interactCar;
+    protected final DrivingGame interactGame;
+    protected ImageIcon obsIcon;
+    protected int coolness;
+    protected int weight;
+    Obstacles(Car interactCar, DrivingGame interactGame, int weight, ImageIcon icon)
+    {
         this.interactCar = interactCar;
         this.interactGame = interactGame;
-        this.coolness = coolness;
+        this.weight = weight;
+        obsIcon = icon;
+        this.coolness = this.weight/10;
+    }
+    Obstacles(Car interactCar, DrivingGame interactGame, ImageIcon icon)
+    {
+        this.interactCar = interactCar;
+        this.interactGame = interactGame;
         obsIcon = icon;
     }
-
     public int getObsX() {
         return obsX;
     }
     public void setObsX(int obsX) {
         this.obsX = obsX;
     }
-
     public int getObsY() {
         return obsY;
     }
-
     public void setObsY(int obsY) {
         this.obsY = obsY;
     }
     public ImageIcon getObsIcon() {
         return obsIcon;
     }
-
     public void setObsIcon(ImageIcon obsIcon) {
         this.obsIcon = obsIcon;
     }
@@ -59,7 +59,6 @@ public class Obstacles implements ThingsOnRoad, Comparable<Obstacles>{
         }
         return index;
     }
-
     @Override
     public void randomPositionGenerator()
     {
@@ -85,6 +84,8 @@ public class Obstacles implements ThingsOnRoad, Comparable<Obstacles>{
 
     @Override
     public int compareTo(Obstacles o) {
-        return this.coolness - o.coolness;
+        if(this.coolness > o.coolness)
+            return -1;
+        return 1;
     }
 }
