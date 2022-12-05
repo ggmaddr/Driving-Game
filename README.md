@@ -1,7 +1,11 @@
 # Driving-Game
 A classic driving game on road that tries to avoid obstacles and earn as many points as possible.
 
-Download the GradyDrives folder, navigate to "src" --> run the DrivingGame.java file.
+Download the zip file of Driving-Game, unzip the file.
+
+Set up configurations: New configuration --> "Application". 
+Working directory: GradyDrives
+Open GradyDrives folder in the IDE, navigate to "src" --> build and run the DrivingGame.java file.
 
 In GradyDrives folder, .png files and .txt files are essential for the project.
 
