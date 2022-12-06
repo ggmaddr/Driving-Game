@@ -14,8 +14,11 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
     public int getScreenSize() {return screenSize;}
     final private int screenSize = 800;
     String gameOvertext = "";
-
-    private Car car = new Car(300, 600,200,"Ferrari", new ImageIcon("ferrari.png"));
+    private Car car = new Car(300, 600,200,"Ferrari", new ImageIcon("bugatti.png"));
+    Obstacles ob1 = new Obstacles(car, this, 50, new ImageIcon("motorbike.png"));
+    Obstacles ob2 = new Obstacles(car, this, 80, new ImageIcon("rock.png"));
+    Obstacles ob3 = new Obstacles(car, this, 10, new ImageIcon("roadwork.png"));
+    Obstacles gift1 = new Gift(car, this,100,new ImageIcon("gift1.png"));
     private boolean gameOver;
     private int score;
     int markings;
@@ -68,26 +71,11 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
         printer.close();
     }
     public DrivingGame() throws HeadlessException, IOException {
-        markings = 0;
-        score = 0;
-        delay = 100;
-        car.setSpeed(90);
-        gameOver =false;
-
-        Obstacles ob1 = new Obstacles(car, this, 50, new ImageIcon("motorbike.png"));
-        Obstacles ob2 = new Obstacles(car, this, 80, new ImageIcon("rock.png"));
-        Obstacles ob3 = new Obstacles(car, this, 10, new ImageIcon("roadwork.png"));
-        Obstacles gift1 = new Gift(car, this,100,new ImageIcon("gift1.png"));
         obList.add(gift1);
         obList.add(ob1);
         obList.add(ob2);
         obList.add(ob3);
         Collections.sort(obList);
-
-        ob1.randomPositionGenerator();
-        ob2.randomPositionGenerator();
-        ob3.randomPositionGenerator();
-        gift1.randomPositionGenerator();
 
         setBounds(300,10,screenSize+140,screenSize);
         setVisible(true);
@@ -97,9 +85,23 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
         setFocusable(true);
         setResizable(false);
 
-
         //file IO
         fileReader(new FileReader("gameover.txt"));
+        gameReStart();
+    }
+    public void gameReStart()
+    {
+        car.setxPos(300);
+        markings = 0;
+        score = 0;
+        delay = 100;
+        car.setSpeed(90);
+        gameOver =false;
+
+        ob1.randomPositionGenerator();
+        ob2.randomPositionGenerator();
+        ob3.randomPositionGenerator();
+        gift1.randomPositionGenerator();
     }
     @Override
     public void paint(Graphics g) {
@@ -154,7 +156,6 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         try {
             drawGameOver(g);
         } catch (FileNotFoundException e) {
@@ -190,7 +191,6 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
             g.setFont(new Font("Arial", Font.BOLD, 50));
             g.drawString(String.valueOf(i+1), 640, 190 + Yincrement);
         }
-
     }
 
     public void drawScore(Graphics g)
@@ -278,11 +278,8 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
         if(e.getKeyCode()==KeyEvent.VK_SPACE && gameOver)
         {
             gameOver=false;
-            try {
-                new DrivingGame();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            gameReStart();
+            repaint();
         }
     }
     @Override
