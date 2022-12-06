@@ -19,7 +19,7 @@ public class Car extends Vehicles{
                 if (xPos < 100) xPos = 100;
             }
             case 'r' -> {
-                xPos -= 100;
+                xPos += 100;
 
                 if (xPos > 500) xPos = 500;
             }
