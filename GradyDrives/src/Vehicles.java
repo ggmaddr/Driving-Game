@@ -1,23 +1,11 @@
 abstract public class Vehicles {
-    private int speed;
-
     public int getxPos() {
         return xPos;
     }
-
-    public void setxPos(int xPos) {
-        this.xPos = xPos;
-    }
-
     public int getyPos() {
         return yPos;
     }
-
-    public void setyPos(int yPos) {
-        this.yPos = yPos;
-    }
-
-    protected int xPos, yPos, speedlimit;
+    protected int xPos, yPos, speedlimit, speed;
 
     private String type;
     abstract void move(char command);
@@ -33,7 +21,6 @@ abstract public class Vehicles {
     public String getType() {
         return type;
     }
-
 
     Vehicles (String type)
     {
