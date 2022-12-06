@@ -13,29 +13,16 @@ public class Car extends Vehicles{
     }
     @Override
     void move(char command) {
-        switch (command)
-        {
-            case 'l':
-            {
-                setxPos(getxPos() - 100);
-
-                if (getxPos() < 100)
-                {
-                    setxPos(100);
-                }
+        switch (command) {
+            case 'l' -> {
+                xPos -= 100;
+                if (xPos < 100) xPos = 100;
             }
-            break;
-            case 'r':
-            {
-                setxPos(getxPos() + 100);
+            case 'r' -> {
+                xPos -= 100;
 
-                if (getxPos() > 500)
-                {
-                    setxPos(500);
-                }
+                if (xPos > 500) xPos = 500;
             }
-            break;
-
         }
     }
 }
