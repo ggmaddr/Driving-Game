@@ -6,6 +6,9 @@ abstract public class Vehicles {
         return yPos;
     }
     protected int xPos, yPos, speedlimit, speed;
+    
+    public void setxPos(int xPos) {this.xPos = xPos;}
+
 
     private String type;
     abstract void move(char command);
