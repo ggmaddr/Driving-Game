@@ -14,7 +14,7 @@ public class DrivingGame extends JFrame implements KeyListener, ActionListener
     public int getScreenSize() {return screenSize;}
     final private int screenSize = 800;
     String gameOvertext = "";
-    private Car car = new Car(300, 600,200,"Ferrari", new ImageIcon("bugatti.png"));
+    private Car car = new Car(300, 600,200,"Ferrari", new ImageIcon("ferrari.png"));
     Obstacles ob1 = new Obstacles(car, this, 50, new ImageIcon("motorbike.png"));
     Obstacles ob2 = new Obstacles(car, this, 80, new ImageIcon("rock.png"));
     Obstacles ob3 = new Obstacles(car, this, 10, new ImageIcon("roadwork.png"));
