@@ -1,2 +1,2 @@
-From Printer: Your score is 42 using a Ferrari car 
-Your maximum speed is 132 mph
+From Printer: Your score is 1234 using a Ferrari car 
+Your maximum speed is 199 mph

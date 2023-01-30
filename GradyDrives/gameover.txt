@@ -1,4 +1,4 @@
-@instruction: if you want to hide line from reader --> use @,
+@instruction: if you want to hide line from reader --> use @
 @if you want to stop reading --> ".stop"
 @if you want to split line --> "\n"
 @example below:
