@@ -1,6 +1,7 @@
 # Driving-Game
 A classic driving game on road that tries to avoid obstacles and earn as many points as possible.
-Data set contains multiple good-looking realistic supercars and obstacles icons
+Data set contains multiple good-looking realistic supercars and obstacles icons.
+
 <img width="348" alt="Screen Shot 2023-02-22 at 12 26 04 AM" src="https://user-images.githubusercontent.com/102542221/220564010-3aa604e7-b4fe-4ede-9bc3-b81862ca834a.png">
 
 ## Docs
