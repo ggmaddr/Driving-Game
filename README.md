@@ -4,6 +4,8 @@ Data set contains multiple good-looking realistic supercars and obstacles icons.
 
 <img width="348" alt="Screen Shot 2023-02-22 at 12 26 04 AM" src="https://user-images.githubusercontent.com/102542221/220564010-3aa604e7-b4fe-4ede-9bc3-b81862ca834a.png">
 
+<img width="502" alt="Screen Shot 2023-02-22 at 12 30 13 AM" src="https://user-images.githubusercontent.com/102542221/220564994-d67a7fc2-e03b-4f45-a172-ce946acf4398.png">
+
 ## Docs
 This is the document link explains all CS applications of the project.
 https://docs.google.com/document/d/1xSxGgMI5vThuwL3Ni-Heneisr30U7G4KyU2jQ6jKd2Q/
